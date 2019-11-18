@@ -46,36 +46,14 @@ const celebrities = [
   }
 ];
 
-// Celebrity.create(celebrities, (err, savedCelebrities) => {
-//   if (err) { throw err; }
-
-//   Movie.create(movies, (err, savedMOvies) => {
-//     if (err) { throw err; }
-//     savedMovies.forEach(theMovie => {
-//       console.log(`${theMovie.title} - ${theMovie._id}`);
-//     });
-//   });
-
-//   savedCelebrities.forEach(theCelebrity => {
-//     console.log(`${theCelebrity.name} - ${theCelebrity._id}`);
-//   });
-//   mongoose.disconnect();
-// });
 
 mongoose
   .connect('mongodb://localhost/mongoose-movies-development', { useNewUrlParser: true })
   .then(() => {
     return Celebrity.create(celebrities);
   })
-  .then(insertedCelebrities => {
+  .then((insertedCelebrities) => {
     console.log('Inserted celebrities:', insertedCelebrities.length);
-    mongoose.connection.close();
-  })
-  .catch(err => console.log(err));
-
-  mongoose
-  .connect('mongodb://localhost/mongoose-movies-development', { useNewUrlParser: true })
-  .then(() => {
     return Movie.create(movies);
   })
   .then(insertedMovies => {
